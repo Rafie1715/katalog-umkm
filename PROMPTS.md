@@ -30,9 +30,12 @@ Buka localhost:3000/produk/9999: tampil halaman "Halaman tidak ditemukan".**
 
 ## US-03 Pesan via WhatsApp
 
-**Prompt:**
+**Prompt:** **Baca docs/rancangan-teknis.md bagian "Pesan WhatsApp (US-03)".
 
-**Hasil:**
+Ubah components/TombolWhatsApp.jsx menjadi tautan yang membuka https://wa.me/ ke nomor di lib/toko.js, dengan pesan otomatis berisi nama dan harga produk dalam format rupiah. Pesan di-encode dengan encodeURIComponent dan dibuka di tab baru. Pertahankan tampilan tombolnya. Hapus CatatanBelumAktif yang menyebut US-03 di halaman detail produk.**
+
+**Hasil:** **Klik tombol di halaman detail: WhatsApp Web (atau aplikasi WhatsApp) terbuka ke nomor tokomu, dengan pesan sudah terisi, misalnya "Halo, saya mau pesan Kopi Bubuk Robusta 250 g (Rp 45.000)".
+**
 
 **Perbaikan:**
 
