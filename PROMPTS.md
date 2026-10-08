@@ -4,9 +4,15 @@ Catat prompt penting selama membangun aplikasi: apa yang kamu minta, hasilnya, d
 
 ## US-01 Katalog dari database
 
-**Prompt:**
+**Prompt:** **Baca AGENTS.md dan docs/user-stories.md bagian US-01.
 
-**Hasil:**
+Ubah app/page.jsx supaya daftar produk diambil dari tabel "produk" di Supabase, di sisi server, memakai SUPABASE_URL dan SUPABASE_SECRET_KEY dari environment variable. Buat koneksi Supabase untuk server di folder lib/supabase.
+
+Tampilkan produk dengan komponen KartuProduk yang sudah ada, tanpa mengubah tampilannya. Kalau gagal mengambil data, tampilkan pesan error yang jelas di halaman. Kalau tabel kosong, tampilkan tulisan "Belum ada produk". Hapus CatatanBelumAktif dari halaman ini.**
+
+**Hasil:** **Tulisan "Masih data contoh" hilang dan 6 kartu produk tetap tampil. Karena isinya mirip data contoh, buktikan datanya dari database:
+Di Supabase Table Editor → produk, klik ganda nama satu produk, ubah (misalnya jadi "Kopi Spesial"), tekan Enter.
+Muat ulang localhost:3000. Nama produk ikut berubah = berhasil.**
 
 **Perbaikan:**
 
