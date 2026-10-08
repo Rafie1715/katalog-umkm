@@ -203,7 +203,6 @@ Setelah selesai, jelaskan file yang diubah dan cara mengetes pencarian, URL, kon
 
 **Prompt:**
 
-```text
 Baca AGENTS.md, docs/PRD.md, docs/user-stories.md bagian US-12, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan hanya US-12 dengan pilihan jumlah; jangan menambah varian atau kolom database karena kriterianya "jumlah atau varian".
 
 Tambahkan input Jumlah pada halaman detail app/produk/[id]/page.jsx, default 1 dan hanya menerima bilangan bulat 1 sampai 999. Tempatkan interaksi jumlah dalam Client Component kecil dan gunakan komponen yang ada jika sesuai. Data produk tetap diambil melalui Server Component; jangan mengirim kunci atau mengakses Supabase di browser.
@@ -217,7 +216,6 @@ Tampilkan total yang mengikuti jumlah. Jika input kosong, nol, negatif, pecahan,
 Jangan menambah keranjang, pembayaran, penyimpanan pesanan, varian, atau aturan stok. Pertahankan tampilan sesuai DESIGN.md. Jangan mengubah skema/RLS, memasang paket npm, atau menjalankan Git.
 
 Setelah selesai, jelaskan file yang diubah, hasil pemeriksaan, dan cara mengetes jumlah serta isi tautan WhatsApp di HP dan laptop. Pengujian cukup sampai pesan terisi; jangan mengirim pesan ke toko.
-```
 
 **Cara mengetes:** Buka detail produk, pilih jumlah 2, dan cocokkan total dengan dua kali harga satuan. Klik tombol WhatsApp dan periksa teks tanpa mengirim pesan. Coba jumlah 0, negatif, pecahan, kosong, dan lebih dari 999; pemesanan harus dicegah sampai input valid.
 
@@ -229,7 +227,6 @@ Setelah selesai, jelaskan file yang diubah, hasil pemeriksaan, dan cara mengetes
 
 **Prompt:**
 
-```text
 Baca AGENTS.md, docs/PRD.md, docs/user-stories.md bagian US-13, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan hanya US-13. Periksa app/layout.jsx, lib/toko.js, serta ikon public/icons/icon-192.png dan public/icons/icon-512.png.
 
 Buat manifest PWA memakai dukungan bawaan Next.js App Router, misalnya app/manifest.js. Gunakan identitas toko dari lib/toko.js, start_url /, scope /, display standalone, serta warna yang sesuai token proyek. Daftarkan ikon yang tersedia dengan ukuran dan tipe yang benar. Pastikan manifest terhubung dari halaman dan metadata ikon/tema ditempatkan sesuai API Next.js yang digunakan proyek.
@@ -241,7 +238,6 @@ Jangan mengubah alur login, kelola produk, atau WhatsApp. Tidak perlu membuat pr
 Verifikasi manifest dan ikon dapat diakses, periksa menggunakan mode production lokal bila lingkungan memungkinkan, dan jelaskan pengujian pada situs HTTPS di Vercel melalui browser HP yang mendukung pemasangan. Jangan melakukan deploy dari prompt ini. Bedakan pengujian lokal yang sudah dilakukan dengan pemasangan perangkat fisik yang belum diuji.
 
 Jangan mengubah skema/RLS atau menjalankan Git. Setelah selesai, jelaskan file yang diubah, cara menjalankan pemeriksaan production, cara memasang di Android/iOS sesuai dukungan browser, dan batasan offline yang benar-benar diterapkan.
-```
 
 **Cara mengetes:** Jalankan build dan mode production sesuai script proyek. Periksa manifest serta ikon melalui DevTools. Setelah pengguna menerbitkan ke Vercel, buka situs HTTPS dari HP dan gunakan menu pemasangan/tambah ke layar utama yang tersedia. Jalankan dari ikon; pastikan nama, ikon, katalog, dan tautan WhatsApp berfungsi. Periksa perilaku offline sesuai implementasi.
 
