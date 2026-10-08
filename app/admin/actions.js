@@ -204,3 +204,129 @@ export async function tambahProduk(prevState, formData) {
   revalidatePath("/admin");
   redirect("/admin?berhasil=" + encodeURIComponent("Produk berhasil ditambahkan."));
 }
+
+export async function ubahProduk(prevState, formData) {
+  const data = formData instanceof FormData ? formData : prevState;
+
+  const rawId = data instanceof FormData ? data.get("id") : (data?.id ?? prevState?.id);
+  const rawNama = data instanceof FormData ? data.get("nama") : data?.nama;
+  const rawHarga = data instanceof FormData ? data.get("harga") : data?.harga;
+  const rawKategori = data instanceof FormData ? data.get("kategori") : data?.kategori;
+  const rawFotoUrl = data instanceof FormData ? data.get("foto_url") : data?.foto_url;
+  const rawDeskripsi = data instanceof FormData ? data.get("deskripsi") : data?.deskripsi;
+
+  const values = {
+    id: rawId?.toString() || "",
+    nama: rawNama?.toString() || "",
+    harga: rawHarga?.toString() || "",
+    kategori: rawKategori?.toString() || "",
+    foto_url: rawFotoUrl?.toString() || "",
+    deskripsi: rawDeskripsi?.toString() || "",
+  };
+
+  const supabase = await createSessionClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    return {
+      error: "Tidak diizinkan: Anda harus login sebagai admin terlebih dahulu.",
+      values,
+      timestamp: Date.now(),
+    };
+  }
+
+  // Validasi ID produk:
+  const idNum = Number(values.id);
+  if (!values.id || !Number.isInteger(idNum) || idNum <= 0) {
+    return {
+      error: "ID produk tidak valid.",
+      values,
+      timestamp: Date.now(),
+    };
+  }
+
+  // Validasi: nama setelah trim wajib terisi
+  const nama = values.nama.trim();
+  if (!nama) {
+    return {
+      error: "Nama produk wajib diisi.",
+      values,
+      timestamp: Date.now(),
+    };
+  }
+
+  // Validasi: harga wajib diisi dan berupa angka finite minimal 0
+  const trimmedHarga = values.harga.trim();
+  if (!trimmedHarga) {
+    return {
+      error: "Harga wajib diisi.",
+      values,
+      timestamp: Date.now(),
+    };
+  }
+
+  const hargaNum = Number(trimmedHarga);
+  if (!Number.isFinite(hargaNum) || hargaNum < 0) {
+    return {
+      error: "Harga harus berupa angka valid dan minimal 0.",
+      values,
+      timestamp: Date.now(),
+    };
+  }
+
+  // Validasi: foto_url jika diisi hanya menerima URL http/https atau path aset lokal valid
+  const trimmedFoto = values.foto_url.trim();
+  let foto_url = null;
+  if (trimmedFoto) {
+    const isHttp = /^https?:\/\/.+/i.test(trimmedFoto);
+    const isLocalAsset = /^\/[^\s]+$/.test(trimmedFoto);
+    if (!isHttp && !isLocalAsset) {
+      return {
+        error: "Link foto harus berupa URL (http/https) atau path aset lokal (diawali dengan /).",
+        values,
+        timestamp: Date.now(),
+      };
+    }
+    foto_url = trimmedFoto;
+  }
+
+  const kategori = values.kategori.trim() || null;
+  const deskripsi = values.deskripsi.trim() || null;
+  const hargaFinal = Math.round(hargaNum);
+
+  const { data: updatedData, error: updateError } = await supabase
+    .from("produk")
+    .update({
+      nama,
+      harga: hargaFinal,
+      deskripsi,
+      foto_url,
+      kategori,
+    })
+    .eq("id", idNum)
+    .select();
+
+  if (updateError) {
+    return {
+      error: "Gagal menyimpan perubahan: " + updateError.message,
+      values,
+      timestamp: Date.now(),
+    };
+  }
+
+  if (!updatedData || updatedData.length === 0) {
+    return {
+      error: "Produk tidak ditemukan atau sudah dihapus.",
+      values,
+      timestamp: Date.now(),
+    };
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin");
+  revalidatePath(`/produk/${idNum}`);
+  redirect("/admin?berhasil=" + encodeURIComponent("Perubahan produk berhasil disimpan."));
+}

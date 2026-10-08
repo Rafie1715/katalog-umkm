@@ -11,7 +11,8 @@ export default function FormProduk({ produk = {}, labelTombol, action = tambahPr
   const [state, formAction, isPending] = useActionState(action, null);
 
   const nilaiNama = state?.values?.nama ?? produk.nama ?? "";
-  const nilaiHarga = state?.values?.harga ?? produk.harga ?? "";
+  const nilaiHarga =
+    state?.values?.harga ?? (produk.harga !== undefined ? String(produk.harga) : "");
   const nilaiKategori = state?.values?.kategori ?? produk.kategori ?? "";
   const nilaiFotoUrl = state?.values?.foto_url ?? produk.foto_url ?? "";
   const nilaiDeskripsi = state?.values?.deskripsi ?? produk.deskripsi ?? "";
@@ -23,6 +24,8 @@ export default function FormProduk({ produk = {}, labelTombol, action = tambahPr
           {state.error}
         </div>
       )}
+
+      {produk.id && <input type="hidden" name="id" value={produk.id} />}
 
       <Input
         label="Nama produk"
