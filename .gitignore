@@ -9,6 +9,7 @@
 .env
 .env.local
 .env*.local
+.env.example
 
 # lain-lain
 .DS_Store

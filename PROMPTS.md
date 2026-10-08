@@ -249,7 +249,6 @@ Jangan mengubah skema/RLS atau menjalankan Git. Setelah selesai, jelaskan file y
 
 **Prompt:**
 
-```text
 Baca AGENTS.md, docs/PRD.md, docs/user-stories.md bagian US-14, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan hanya US-14 setelah form tambah dan ubah produk berfungsi.
 
 Tambahkan tombol "Buat deskripsi dengan AI" pada components/FormProduk.jsx untuk halaman tambah dan ubah. Tombol memakai nama dan kategori terbaru dari form, meminta saran deskripsi dari Gemini API, lalu mengisi kolom deskripsi agar admin bisa memeriksa dan mengeditnya. Jangan otomatis menyimpan hasil ke database; penyimpanan tetap melalui tombol Simpan produk yang sudah ada. Tombol AI tidak boleh memicu submit simpan produk.
@@ -265,7 +264,6 @@ Tampilkan status "Membuat deskripsi...", cegah permintaan berulang saat berlangs
 Pertahankan validasi serta keamanan simpan produk. Ikuti DESIGN.md dan gunakan komponen yang sudah ada. Jangan mengubah skema/RLS, memasang paket npm, atau menjalankan Git. Ubah hanya file yang diperlukan fitur ini.
 
 Setelah selesai, jelaskan file yang diubah, konfigurasi yang perlu diisi pengguna, pengujian yang benar-benar dilakukan, dan cara menguji alur berhasil/gagal serta penolakan akses tanpa login. Jika belum ada API key, selesaikan kode dan pemeriksaan yang memungkinkan, lalu nyatakan pengujian API langsung belum dilakukan.
-```
 
 **Cara mengetes:** Isi konfigurasi Gemini di lokal lalu mulai ulang server. Login, isi nama/kategori, dan klik Buat deskripsi dengan AI. Pastikan draf muncul, dapat diedit, dan belum tersimpan sebelum klik Simpan produk. Uji juga di form ubah. Coba nama/kategori kosong, konfigurasi tidak tersedia, dan sesi berakhir; tampilkan error tanpa menghapus deskripsi lama. Di DevTools Network, pastikan browser hanya memanggil aplikasi sendiri untuk aksi ini dan tidak menerima API key atau memanggil Gemini secara langsung.
 
