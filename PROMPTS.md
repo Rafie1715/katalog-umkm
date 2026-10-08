@@ -115,7 +115,6 @@ Setelah selesai, jelaskan file yang diubah, pemeriksaan yang benar-benar dijalan
 
 **Prompt:**
 
-```text
 Baca AGENTS.md, docs/PRD.md, docs/user-stories.md bagian US-08, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan hanya US-08 dengan memanfaatkan hasil fitur sebelumnya.
 
 Aktifkan form di app/admin/produk/baru/page.jsx melalui components/FormProduk.jsx dan Server Action di app/admin/actions.js. Simpan field nama, harga, deskripsi, foto_url, dan kategori ke tabel produk. Biarkan id dan created_at diisi database. Foto memakai link gambar atau path aset lokal yang sudah didukung form; jangan membuat upload gambar.
@@ -127,7 +126,6 @@ Validasi di server: nama setelah trim wajib terisi, harga wajib diisi dan berupa
 Setelah berhasil, perbarui cache /admin dan / agar produk baru tampil, lalu alihkan ke /admin dengan pesan berhasil. Pertahankan kompatibilitas FormProduk dengan halaman ubah yang sudah ada. Hapus CatatanBelumAktif untuk US-08 setelah selesai, dan ikuti DESIGN.md serta komponen yang tersedia.
 
 Supabase hanya boleh diakses di server. Jangan memasang paket npm atau menjalankan Git. Ubah hanya file yang dibutuhkan. Setelah selesai, jelaskan file yang diubah, hasil pemeriksaan, dan cara mengetes validasi, penyimpanan, serta penolakan Server Action tanpa login.
-```
 
 **Cara mengetes:** Login dan tambah produk bernama `Produk uji bonus`. Pastikan kembali ke `/admin`, data tersimpan di Supabase, dan produk tampil di katalog. Coba nama kosong dan harga negatif; penyimpanan harus ditolak. Keluar lalu coba membuka `/admin/produk/baru`; harus diarahkan ke login. Uji juga submit form dari tab lama setelah sesi diakhiri; tidak boleh menambah data.
 
@@ -139,7 +137,6 @@ Supabase hanya boleh diakses di server. Jangan memasang paket npm atau menjalank
 
 **Prompt:**
 
-```text
 Baca AGENTS.md, docs/PRD.md, docs/user-stories.md bagian US-09, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan hanya US-09. Gunakan kembali FormProduk, validasi, dan koneksi server dari fitur sebelumnya.
 
 Aktifkan app/admin/produk/[id]/ubah/page.jsx. Pada Next.js 16, baca parameter dengan const { id } = await params. Verifikasi login di server dan ambil produk berdasarkan id memakai koneksi sesi admin. Form harus terisi nama, harga, deskripsi, foto_url, dan kategori dari database. Jika id tidak valid atau produk tidak ditemukan, tampilkan notFound(); bedakan kondisi itu dari kegagalan koneksi database.
@@ -151,7 +148,6 @@ Tampilkan error jika gagal atau produk sudah tidak ada, pertahankan input, dan c
 Pertahankan fungsi tambah produk dan tampilan FormProduk. Hapus CatatanBelumAktif khusus US-09. Supabase hanya di server; jangan mengubah skema/RLS, memasang paket npm baru, atau menjalankan Git. Ubah hanya file yang diperlukan.
 
 Setelah selesai, jelaskan file yang diubah, pemeriksaan yang dijalankan, dan cara mengetes perubahan, id tidak ditemukan, input tidak valid, serta penolakan update saat sesi berakhir.
-```
 
 **Cara mengetes:** Klik Ubah pada produk uji. Pastikan data lama terisi, lalu ubah nama dan harga. Periksa hasilnya di Supabase, `/admin`, katalog, dan detail produk. Coba id yang tidak ada. Buka form saat login, keluar melalui tab lain, lalu submit form lama; data tidak boleh berubah.
 
