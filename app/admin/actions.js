@@ -330,3 +330,58 @@ export async function ubahProduk(prevState, formData) {
   revalidatePath(`/produk/${idNum}`);
   redirect("/admin?berhasil=" + encodeURIComponent("Perubahan produk berhasil disimpan."));
 }
+
+export async function hapusProduk(arg1) {
+  let id;
+  if (arg1 instanceof FormData) {
+    id = arg1.get("id");
+  } else if (typeof arg1 === "object" && arg1 !== null && "id" in arg1) {
+    id = arg1.id;
+  } else {
+    id = arg1;
+  }
+
+  const supabase = await createSessionClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    return {
+      error: "Tidak diizinkan: Anda harus login sebagai admin terlebih dahulu.",
+    };
+  }
+
+  const idNum = Number(id);
+  if (!id || !Number.isInteger(idNum) || idNum <= 0) {
+    return {
+      error: "ID produk tidak valid.",
+    };
+  }
+
+  const { data: deletedData, error: deleteError } = await supabase
+    .from("produk")
+    .delete()
+    .eq("id", idNum)
+    .select();
+
+  if (deleteError) {
+    return {
+      error: "Gagal menghapus produk: " + deleteError.message,
+    };
+  }
+
+  if (!deletedData || deletedData.length === 0) {
+    return {
+      error: "Produk tidak ditemukan atau sudah dihapus.",
+    };
+  }
+
+  const namaProduk = deletedData[0]?.nama || "Produk";
+
+  revalidatePath("/");
+  revalidatePath("/admin");
+  revalidatePath(`/produk/${idNum}`);
+  redirect("/admin?berhasil=" + encodeURIComponent(`Produk "${namaProduk}" berhasil dihapus.`));
+}

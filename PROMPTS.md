@@ -159,7 +159,6 @@ Setelah selesai, jelaskan file yang diubah, pemeriksaan yang dijalankan, dan car
 
 **Prompt:**
 
-```text
 Baca AGENTS.md, docs/PRD.md, docs/user-stories.md bagian US-10, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan hanya US-10.
 
 Aktifkan tombol Hapus pada components/TabelProduk.jsx menggunakan Server Action di app/admin/actions.js. Sebelum mengirim aksi, minta konfirmasi yang menyebut nama produk. Jika dibatalkan, jangan kirim permintaan hapus. Gunakan Client Component kecil jika diperlukan untuk konfirmasi dan status proses; jangan membuat client Supabase di browser.
@@ -171,7 +170,6 @@ Cegah klik berulang selama penghapusan berlangsung. Tampilkan pesan yang jelas j
 Gunakan komponen Tombol varian bahaya dan pertahankan tampilan sesuai DESIGN.md. Hapus CatatanBelumAktif yang khusus terkait US-10 bila ada. Jangan mengubah skema/RLS, memasang paket npm, atau menjalankan Git. Ubah hanya file yang diperlukan.
 
 Setelah selesai, jelaskan perubahan dan cara mengetes konfirmasi batal/setuju, error, serta penolakan aksi hapus tanpa login. Untuk pengujian penghapusan, gunakan produk uji yang dibuat khusus, bukan produk toko yang sebenarnya.
-```
 
 **Cara mengetes:** Pada produk uji, klik Hapus lalu batalkan; produk harus tetap ada. Ulangi dan setujui; produk harus hilang dari admin, katalog, dan database. Buka URL detail sebelumnya; harus tampil tidak ditemukan. Uji dari tab admin lama setelah logout; penghapusan harus ditolak.
 
