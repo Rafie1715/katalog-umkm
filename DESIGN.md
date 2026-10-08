@@ -6,14 +6,14 @@ Ikuti panduan ini setiap kali membuat atau mengubah tampilan, supaya semua halam
 
 | Token | Nilai awal | Dipakai untuk |
 | --- | --- | --- |
-| `latar` | `#ffffff` | Latar halaman dan kartu |
-| `permukaan` | `#f1f5f2` | Latar bagian sekunder, footer, kepala tabel |
-| `garis` | `#dde5e0` | Garis tepi dan pemisah |
-| `teks` | `#1b2420` | Teks utama |
-| `teks-lembut` | `#5b6a62` | Teks pendukung: kategori, keterangan |
-| `utama` | `#1f6b4f` | Tombol utama, tautan aktif, nama toko |
-| `utama-gelap` | `#154d39` | Tombol utama saat disorot |
-| `harga` / `harga-latar` | `#7a4e09` / `#fbefd8` | Label harga |
+| `latar` | `#faf8f5` | Latar halaman dan kartu (krem lembut) |
+| `permukaan` | `#f2eee8` | Latar bagian sekunder, footer, kepala tabel |
+| `garis` | `#e4ded5` | Garis tepi dan pemisah |
+| `teks` | `#19241e` | Teks utama |
+| `teks-lembut` | `#59685e` | Teks pendukung: kategori, keterangan |
+| `utama` | `#1b6346` | Tombol utama, tautan aktif, nama toko (hijau hutan) |
+| `utama-gelap` | `#134631` | Tombol utama saat disorot |
+| `harga` / `harga-latar` | `#855208` / `#faedd3` | Label harga dengan aksen keemasan |
 | `bahaya` | `#b42318` | Aksi hapus dan pesan error |
 
 Pakai sebagai kelas Tailwind, misalnya `bg-utama`, `text-teks-lembut`, `border-garis`. Jangan menulis kode warna langsung di kelas.

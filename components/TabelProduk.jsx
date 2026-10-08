@@ -1,6 +1,7 @@
 import { formatRupiah } from "@/lib/format";
 import Tombol from "@/components/Tombol";
 import TombolHapusProduk from "@/components/TombolHapusProduk";
+import FotoProduk from "@/components/FotoProduk";
 
 export default function TabelProduk({ daftarProduk }) {
   return (
@@ -21,7 +22,14 @@ export default function TabelProduk({ daftarProduk }) {
             <tr key={produk.id} className="border-t border-garis">
               <td className="px-4 py-3">
                 <div className="flex items-center gap-3">
-                  <img src={produk.foto_url} alt="" className="h-10 w-10 rounded-md object-cover" />
+                  <div className="h-10 w-10 shrink-0 overflow-hidden rounded-md border border-garis bg-permukaan">
+                    <FotoProduk
+                      fotoUrl={produk.foto_url}
+                      alt=""
+                      ukuranBadge="sembunyi"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
                   <span className="font-semibold">{produk.nama}</span>
                 </div>
               </td>

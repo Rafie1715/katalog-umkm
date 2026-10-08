@@ -4,6 +4,7 @@ import { useActionState, useState, useRef } from "react";
 import Input from "@/components/Input";
 import Tombol from "@/components/Tombol";
 import { tambahProduk, buatDeskripsiAI } from "@/app/admin/actions";
+import { DAFTAR_ASET_TERSEDIA } from "@/lib/produk-gambar";
 
 // Dipakai untuk tambah produk (US-08) dan ubah produk (US-09). Keduanya bonus di jalur offline.
 // Nama field sama dengan kolom tabel "produk".
@@ -125,10 +126,31 @@ export default function FormProduk({ produk = {}, labelTombol, action = tambahPr
       <Input
         label="Link foto"
         name="foto_url"
-        placeholder="https://... atau /produk/nama-file.svg"
+        placeholder="https://... atau /produk/kopi-robusta.webp"
         key={`foto_url-${state?.timestamp || "init"}`}
         defaultValue={nilaiFotoUrl}
       />
+      <div className="-mt-2 flex flex-col gap-1.5">
+        <p className="text-xs text-teks-lembut">
+          Pilihan aset foto lokal berkualitas yang tersedia:
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {DAFTAR_ASET_TERSEDIA.map((aset) => (
+            <button
+              key={aset.path}
+              type="button"
+              onClick={() => {
+                const input = formRef.current?.elements["foto_url"];
+                if (input) input.value = aset.path;
+              }}
+              className="rounded-lg border border-garis bg-permukaan/70 px-2 py-1 text-[11px] font-medium text-teks transition-colors hover:border-utama hover:text-utama active:bg-garis"
+              title={aset.deskripsi}
+            >
+              {aset.path.replace("/produk/", "")}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="flex flex-col gap-1.5">
         <div className="flex flex-wrap items-center justify-between gap-2">

@@ -270,3 +270,119 @@ Setelah selesai, jelaskan file yang diubah, konfigurasi yang perlu diisi penggun
 **Hasil aktual:** Belum dijalankan.
 
 **Perbaikan:**
+
+## Penyempurnaan tampilan dan gambar produk
+
+Prompt berikut disusun dengan bantuan AI untuk penyempurnaan tambahan, bukan nomor user story atau poin bonus baru. Salin satu blok `text` ke Google Antigravity dan jalankan berurutan: UI-01, VIS-01, lalu UI-02. Uji setiap tahap sebelum melanjutkan. Pertahankan fitur yang sudah berjalan; jangan mengimplementasikan ulang US-01 sampai US-14.
+
+### UI-01 Tampilan katalog dan detail yang lebih menarik
+
+**Prompt:**
+
+```text
+Baca AGENTS.md, docs/PRD.md, docs/user-stories.md, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan satu lingkup penyempurnaan: UI/UX halaman pengunjung katalog UMKM ini. Langsung implementasikan pada kode yang ada, bukan hanya memberikan saran desain.
+
+Periksa app/page.jsx, app/produk/[id]/page.jsx, app/layout.jsx, app/globals.css, lib/toko.js, serta komponen Header, Footer, KartuProduk, Input, Tombol, PesanProduk, dan TombolWhatsApp jika tersedia. Pahami fitur yang sudah aktif sebelum mengedit. Gunakan identitas asli dari lib/toko.js; saat prompt ini ditulis nama tokonya Toko Rafie.
+
+ARAH VISUAL
+Buat etalase produk lokal yang hangat, modern, dan punya karakter. Gunakan latar krem lembut, hijau hutan sebagai warna utama, dan aksen keemasan pada harga. Definisikan warna di token app/globals.css, bukan kode warna langsung di kelas. Pertahankan Plus Jakarta Sans, judul sesuai skala DESIGN.md, lebar max-w-5xl, konten rata kiri, serta katalog dua kolom di HP dan tiga kolom di desktop. Jika nilai token berubah, sesuaikan dokumentasinya di DESIGN.md. Keunikan datang dari komposisi, tipografi, foto, dan detail motif anyaman geometris tipis yang dibuat dengan CSS; jangan memenuhi halaman dengan dekorasi.
+
+IMPLEMENTASI
+1. Rapikan header: nama toko jelas, navigasi ringkas yang benar-benar berfungsi, dan akses katalog mudah ditemukan. Gunakan header melekat hanya jika tidak menutupi konten atau fokus keyboard.
+2. Buat bagian pembuka dengan komposisi asimetris pada desktop: judul singkat tentang produk lokal, tagline toko, tombol "Jelajahi produk" menuju bagian katalog, serta susunan maksimal tiga foto produk yang memang tersedia dari database. Pada HP, susun vertikal dan jaga agar produk cepat terlihat. Jika foto/data belum tersedia, gunakan komposisi teks yang tetap rapi; jangan mengarang produk untuk mengisi hero.
+3. Perjelas hierarki katalog: judul bagian, jumlah hasil dari data sebenarnya, kolom pencarian yang mudah dipakai, dan kontrol kembali ke seluruh produk. Pertahankan mekanisme pencarian serta URL yang sudah berjalan. Jangan menambah tombol filter kategori yang belum punya fungsi.
+4. Perbaiki KartuProduk dengan ruang foto persegi yang konsisten, kategori yang tenang, nama mudah dibaca, dan harga yang menonjol. Gunakan tepi halus, bayangan ringan, dan respons hover/fokus yang lembut. Seluruh kartu tetap menjadi satu tautan detail; jangan menaruh tombol atau tautan lain di dalam tautan kartu.
+5. Tata halaman detail dengan foto besar dan informasi produk dalam dua kolom di desktop, satu kolom di HP. Sediakan tautan kembali ke katalog, kategori, nama, harga, deskripsi, jumlah/total jika US-12 sudah aktif, dan tombol WhatsApp yang jelas. Jika tombol dibuat melekat di bagian bawah HP, sediakan ruang dan safe area agar tidak menutupi konten.
+6. Rapikan footer dengan nama toko, alamat, dan jam buka dari lib/toko.js. Jangan membuat testimoni, rating, diskon, label terlaris, stok, sertifikasi, atau klaim jumlah pelanggan yang tidak ada datanya.
+7. Desain kondisi database kosong, hasil pencarian kosong, gagal memuat, dan produk tidak ditemukan agar tetap jelas dan konsisten. Jangan memakai data contoh untuk menyamarkan kegagalan database.
+
+KUALITAS UX
+Pastikan label input terlihat, kontras teks memadai, fokus keyboard jelas, target sentuh nyaman sekitar 44 px, serta tidak ada interaksi yang hanya bisa dilakukan dengan hover. Gunakan transisi singkat dan hormati prefers-reduced-motion. Hindari carousel otomatis dan animasi berat. Uji di lebar 390 px, 768 px, dan 1440 px: tidak ada teks terpotong, elemen bertabrakan, atau gulir horizontal pada halaman.
+
+BATASAN
+Gunakan kembali komponen yang ada. Pertahankan Next.js 16 App Router, JavaScript, Tailwind CSS 4, Supabase, dan Vercel. Akses Supabase tetap di server; jangan mengubah autentikasi, mutasi data, skema/RLS, environment variable, atau isi produk. Jangan memasang paket npm, menjalankan Git, atau melakukan deploy. Untuk tahap ini gunakan gambar yang sudah tersedia; pembuatan gambar baru dikerjakan pada prompt VIS-01. Perhatikan dampak perubahan komponen bersama terhadap halaman admin.
+
+VERIFIKASI
+Jalankan pemeriksaan yang tersedia di package.json dan build jika lingkungan memungkinkan. Periksa tampilan melalui browser dan ambil screenshot desktop/HP jika alat tersedia. Uji katalog -> detail -> WhatsApp tanpa mengirim pesan, pencarian, jumlah jika aktif, serta halaman kosong/error. Perbaiki masalah tampilan yang ditemukan sebelum selesai. Laporkan file yang berubah, keputusan visual utama, hasil pemeriksaan yang benar-benar dilakukan, dan keterbatasan pengujian.
+```
+
+**Cara mengetes:** Buka katalog dan detail pada HP serta desktop. Coba pencarian, tautan kembali, pilihan jumlah, dan tombol WhatsApp. Gunakan tombol Tab untuk memeriksa fokus. Pastikan produk mudah ditemukan, harga terbaca, dan tombol tidak menutupi konten.
+
+**Hasil aktual:** Belum dijalankan.
+
+**Perbaikan:**
+
+### VIS-01 Gambar produk yang menarik dan konsisten
+
+**Prompt:**
+
+```text
+Baca AGENTS.md, docs/PRD.md, docs/user-stories.md, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan satu lingkup: menyiapkan dan mengintegrasikan gambar produk yang lebih menarik. Pertahankan hasil desain UI-01 dan semua fungsi aplikasi.
+
+Periksa public/produk, components/KartuProduk.jsx, halaman detail produk, tabel admin, serta cara foto_url dirender. Data produk yang tampil tetap berasal dari database. lib/data-contoh.js hanya boleh dipakai sebagai referensi aset lama, bukan diaktifkan kembali sebagai sumber katalog.
+
+ARAH GAMBAR
+Gunakan gaya foto katalog yang konsisten: pencahayaan alami lembut dari samping, latar krem atau permukaan kayu terang, bayangan halus, warna produk alami, objek utama tajam, dan properti pendukung secukupnya. Buat komposisi persegi dengan ruang aman agar objek tidak terpotong pada kartu. Hindari tulisan buatan, watermark, logo, dan kemasan bermerek yang tidak diberikan pengguna.
+
+Enam aset awal yang tersedia adalah kopi.svg, keripik.svg, sambal.svg, nastar.svg, tas.svg, dan batik.svg. Jika produk terkait masih dipakai, siapkan visual berbeda yang sesuai:
+- Kopi bubuk robusta: bubuk kopi, biji kopi sebagai properti, dan kemasan polos; jangan hanya menampilkan secangkir minuman.
+- Keripik singkong balado: irisan singkong renyah berbumbu merah dalam mangkuk sederhana.
+- Sambal bawang: botol atau stoples bening berisi sambal, dengan cabai dan bawang secukupnya.
+- Nastar: kue nastar keemasan dan toples sederhana, dengan satu kue dibelah untuk memperlihatkan isian.
+- Tas anyaman pandan: tas sebagai objek utama, detail anyaman jelas, latar bersih.
+- Kain batik: kain terlipat dan bentangan sebagian motif agar tekstur serta pola terlihat.
+Sesuaikan dengan produk aktual; jangan menambah produk baru atau mengarang atribut produk demi gambar.
+
+SUMBER ASET
+Utamakan foto asli produk yang tersedia dari pemilik toko. Jika belum ada dan alat pembuat gambar tersedia, buat ilustrasi foto dengan arahan di atas. Gambar AI atau foto stok adalah ilustrasi, bukan bukti rupa produk asli; tampilkan keterangan "Gambar ilustrasi" hanya pada aset yang memang demikian. Jika memakai stok, periksa izin penggunaan dan catat halaman sumber serta atribusi yang diperlukan. Jangan mengambil gambar acak dari hasil pencarian atau memakai URL gambar acak yang berubah-ubah. Jika alat gambar dan foto yang sesuai belum tersedia, lanjutkan integrasi/fallback yang bisa dikerjakan dan laporkan aset yang masih kurang; jangan mengklaim file gambar sudah dibuat.
+
+INTEGRASI DENGAN DATA
+Simpan aset yang benar-benar tersedia di public/produk dengan nama deskriptif, misalnya kopi-robusta.webp. Pakai WebP/JPEG yang sudah dioptimalkan; sasaran sisi sekitar 1000 px dan ukuran sekitar 250 KB per foto bila kualitas memungkinkan, menggunakan alat yang sudah tersedia tanpa memasang paket npm.
+
+foto_url dari database tetap menjadi acuan. Untuk mengganti enam ilustrasi bawaan tanpa mengubah database, boleh buat pemetaan eksplisit dari path lama seperti /produk/kopi.svg ke aset baru yang sudah ada. Terapkan resolver bersama secara konsisten pada katalog, detail, gambar hero, dan tabel admin. Pemetaan hanya berlaku untuk path bawaan yang dikenali; URL foto asli yang dimasukkan admin harus tetap diprioritaskan dan tidak boleh ditimpa oleh pencocokan nama atau kategori. Jangan mengganti semua foto dengan satu gambar generik. Jika ada aset ilustrasi, simpan penandanya di metadata aset lokal, tanpa menambah kolom database.
+
+Jangan menulis database dari skrip memakai secret key. Bila produk memerlukan foto_url baru, berikan daftar produk/path yang siap dimasukkan pengguna melalui form ubah produk yang sudah terlindungi login. Jangan mengubah nama, harga, deskripsi, skema, atau RLS untuk kebutuhan gambar.
+
+KUALITAS TAMPILAN
+Sediakan fallback lokal jika foto_url kosong atau gambar gagal dimuat, dengan pesan "Foto belum tersedia" dan tanpa loop error. Foto asli yang gagal dimuat harus masuk fallback, bukan diganti diam-diam dengan ilustrasi produk lain. Tetapkan dimensi atau rasio agar layout tidak meloncat. Pilih object-fit yang menjaga tas, kemasan, dan kain tetap terlihat utuh. Beri alt yang relevan; gambar dekoratif memakai alt kosong. Terapkan lazy loading untuk gambar di bawah layar, sedangkan foto utama yang langsung terlihat jangan ditunda. Ikuti pola image yang sudah digunakan proyek; jika memakai next/image, konfigurasi sumber eksternal dengan batas yang jelas tanpa merusak dukungan link foto admin.
+
+Catat pemetaan aset, asal gambar, status asli/ilustrasi, dan izin atau atribusi bila relevan dalam docs/aset-gambar.md. Jangan memasang paket npm, menjalankan Git, membaca/menampilkan rahasia .env.local, atau melakukan deploy. Supabase tetap hanya di server.
+
+Setelah selesai, verifikasi setiap path baru dapat dimuat dan gambar terlihat benar pada katalog/detail/admin di HP dan desktop. Coba URL gambar rusak dan foto kosong. Jalankan build jika memungkinkan. Laporkan file yang berubah, aset yang benar-benar dibuat, pemetaan yang aktif, dan pekerjaan manual yang masih diperlukan. Jangan mengklaim integrasi selesai jika foto produk yang dirender belum berubah.
+```
+
+**Cara mengetes:** Cocokkan gambar dengan masing-masing produk di katalog, detail, dan admin. Pastikan URL foto khusus milik admin tidak tertimpa ilustrasi bawaan. Uji foto kosong/rusak pada produk uji, periksa fallback, lalu pulihkan nilainya. Muat ulang halaman dan pastikan gambar tidak membuat tata letak meloncat.
+
+**Hasil aktual:** Belum dijalankan.
+
+**Perbaikan:**
+
+### UI-02 Tampilan admin yang rapi dan nyaman dipakai
+
+**Prompt:**
+
+```text
+Baca AGENTS.md, docs/PRD.md, docs/user-stories.md, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan satu lingkup: penyempurnaan UI/UX halaman admin. Gunakan gaya visual dan token dari UI-01, serta aset gambar dari VIS-01 jika sudah tersedia.
+
+Periksa halaman login, daftar produk, tambah produk, ubah produk, ganti password, dan komponen NavAdmin, TabelProduk, FormProduk, TombolHapusProduk, Input, serta Tombol yang tersedia. Pertahankan seluruh Server Action, pemeriksaan sesi, validasi server, konfirmasi hapus, dan alur penyimpanan yang sudah berjalan.
+
+Buat tampilan yang terasa sebagai ruang kerja pemilik toko: judul halaman jelas, deskripsi singkat seperlunya, navigasi dengan penanda halaman aktif, jarak antarbagian konsisten, dan tombol utama mudah ditemukan. Gunakan latar hangat, permukaan form bersih, hijau utama, serta merah khusus aksi berbahaya. Tetap gunakan Plus Jakarta Sans, max-w-5xl, token warna, dan bahasa Indonesia sesuai DESIGN.md.
+
+Rapikan daftar produk dengan thumbnail yang konsisten, nama mudah dipindai, harga rata dan terbaca, serta aksi Ubah/Hapus yang jelas. Pada HP, gunakan tata letak responsif atau gulir horizontal hanya di dalam wadah tabel; halaman keseluruhan tidak boleh melebar. Jika menampilkan jumlah produk, hitung dari data asli. Jangan menambahkan grafik penjualan, pemasukan, pesanan, atau statistik yang tidak tersedia.
+
+Rapikan FormProduk dengan kelompok informasi dasar, foto, dan deskripsi; beri petunjuk singkat pada field yang perlu. Jika sudah ada fitur Gemini, letakkan tombol AI dekat kolom deskripsi dan pertahankan peninjauan hasil sebelum disimpan. Perjelas label, tanda field wajib, error terkait input, pesan berhasil, serta status proses yang sudah ada. Pertahankan nilai input saat gagal dan hindari klik simpan/hapus berulang. Jangan menambah fitur upload foto atau alur bisnis baru.
+
+Buat halaman login dan ganti password konsisten dengan identitas toko. Pertahankan autocomplete yang sesuai dan label yang terlihat. Jangan mengubah pesan, navigasi, atau komponen dengan cara yang membocorkan kredensial atau melemahkan keamanan.
+
+Gunakan elemen semantik, fokus keyboard yang jelas, area sentuh nyaman, dan status error/berhasil yang dapat dikenali pembaca layar. Jangan menyampaikan status hanya lewat warna. Kurangi animasi dan hormati prefers-reduced-motion. Pastikan perubahan komponen bersama tidak merusak katalog/detail.
+
+Ubah hanya file yang diperlukan. Jangan mengubah skema/RLS, koneksi Supabase, environment variable, atau data produk. Jangan memasang paket npm, menjalankan Git, atau melakukan deploy. Hapus CatatanBelumAktif hanya jika fitur terkait memang sudah selesai, bukan sekadar karena tampilannya dirapikan.
+
+Periksa tampilan pada lebar 390 px dan desktop. Jalankan build jika memungkinkan. Uji login gagal/berhasil, navigasi, validasi form, dan konfirmasi hapus batal; gunakan produk uji khusus untuk pengujian mutasi, bukan produk toko sebenarnya. Verifikasi halaman admin tetap menolak akses tanpa login. Laporkan file yang berubah, hasil pemeriksaan, dan pengujian yang belum bisa dilakukan.
+```
+
+**Cara mengetes:** Login dan buka seluruh menu admin di HP serta desktop. Periksa tabel, label form, fokus keyboard, pesan error, dan tombol saat proses berlangsung. Uji tambah/ubah pada produk uji jika fitur sudah aktif. Logout dan pastikan halaman admin kembali terkunci. Periksa katalog untuk memastikan komponen bersama tetap tampil baik.
+
+**Hasil aktual:** Belum dijalankan.
+
+**Perbaikan:**
