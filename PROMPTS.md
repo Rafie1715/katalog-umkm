@@ -181,7 +181,6 @@ Setelah selesai, jelaskan perubahan dan cara mengetes konfirmasi batal/setuju, e
 
 **Prompt:**
 
-```text
 Baca AGENTS.md, docs/PRD.md, docs/user-stories.md bagian US-11, docs/rancangan-teknis.md, dan DESIGN.md. Kerjakan hanya US-11 dengan pilihan pencarian nama produk, sesuai kriteria "filter kategori atau pencarian".
 
 Tambahkan kolom pencarian berlabel "Cari produk" dan tombol Cari di halaman katalog app/page.jsx. Gunakan komponen Input dan Tombol yang sudah ada. Ikuti aturan proyek bahwa form diproses dengan Server Action: action cukup memvalidasi kata pencarian lalu mengarahkan ke /?q=... dengan encoding yang aman. Kata pencarian tampil pada input dan tetap tersimpan dalam URL ketika halaman dimuat ulang atau dibagikan.
@@ -193,7 +192,6 @@ Jika kata pencarian kosong, tampilkan semua produk. Jika tidak ada yang cocok, t
 Jangan menambah filter kategori atau fitur lain pada prompt ini. Jangan mengubah skema/RLS, memasang paket npm, atau menjalankan Git. Hapus catatan fitur belum aktif hanya jika khusus terkait US-11.
 
 Setelah selesai, jelaskan file yang diubah dan cara mengetes pencarian, URL, kondisi kosong, serta tampilan HP sekitar 390 px. Nyatakan pemeriksaan yang belum bisa dijalankan.
-```
 
 **Cara mengetes:** Cari sebagian nama produk dengan huruf kecil/besar dan spasi di tepi. Cari teks yang tidak cocok; pesan kosong harus muncul. Klik Lihat semua produk dan pastikan seluruh katalog kembali. Muat ulang URL pencarian; kata dan hasil pencarian harus tetap sesuai. Periksa tampilan di HP.
 

@@ -1,10 +1,25 @@
+import { redirect } from "next/navigation";
 import KartuProduk from "@/components/KartuProduk";
+import Input from "@/components/Input";
+import Tombol from "@/components/Tombol";
 import { toko } from "@/lib/toko";
 import { createServerClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
-export default async function HalamanKatalog() {
+async function cari(formData) {
+  "use server";
+  const q = formData.get("q")?.toString().trim() || "";
+  if (!q) {
+    redirect("/");
+  }
+  redirect(`/?q=${encodeURIComponent(q)}`);
+}
+
+export default async function HalamanKatalog({ searchParams }) {
+  const params = await searchParams;
+  const query = params?.q?.toString().trim() || "";
+
   let daftarProduk = [];
   let errorPesan = null;
 
@@ -24,6 +39,14 @@ export default async function HalamanKatalog() {
     errorPesan = err.message || "Gagal terhubung ke database.";
   }
 
+  // Saring produk berdasarkan nama tanpa membedakan huruf besar/kecil
+  const kataKunci = query.toLowerCase();
+  const produkTersaring = query
+    ? daftarProduk.filter((produk) =>
+        produk.nama?.toLowerCase().includes(kataKunci)
+      )
+    : daftarProduk;
+
   return (
     <>
       <section className="py-10 sm:py-14">
@@ -39,6 +62,21 @@ export default async function HalamanKatalog() {
           Produk kami
         </h2>
 
+        <form action={cari} className="flex flex-col gap-2 sm:max-w-md sm:flex-row sm:items-end">
+          <div className="flex-1">
+            <Input
+              label="Cari produk"
+              name="q"
+              type="search"
+              defaultValue={query}
+              placeholder="Ketik nama produk..."
+            />
+          </div>
+          <Tombol type="submit" className="sm:h-[46px]">
+            Cari
+          </Tombol>
+        </form>
+
         {errorPesan ? (
           <div className="rounded-xl border border-garis bg-permukaan p-4 text-bahaya">
             <p className="font-semibold">Gagal memuat produk</p>
@@ -46,9 +84,16 @@ export default async function HalamanKatalog() {
           </div>
         ) : daftarProduk.length === 0 ? (
           <p className="text-teks-lembut">Belum ada produk</p>
+        ) : produkTersaring.length === 0 ? (
+          <div className="flex flex-col items-start gap-3 py-6">
+            <p className="text-teks-lembut">Produk tidak ditemukan</p>
+            <Tombol href="/" varian="garis">
+              Lihat semua produk
+            </Tombol>
+          </div>
         ) : (
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-            {daftarProduk.map((produk) => (
+            {produkTersaring.map((produk) => (
               <KartuProduk key={produk.id} produk={produk} />
             ))}
           </div>
