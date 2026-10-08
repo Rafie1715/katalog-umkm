@@ -41,9 +41,14 @@ Ubah components/TombolWhatsApp.jsx menjadi tautan yang membuka https://wa.me/ ke
 
 ## US-04 Login admin
 
-**Prompt:**
+**Prompt:** **Baca AGENTS.md bagian aturan keamanan dan docs/user-stories.md bagian US-04.
 
-**Hasil:**
+Buat login admin memakai Supabase Auth (email dan password) dengan @supabase/ssr dan cookie, memakai SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY. Login diproses dengan Server Action di app/admin/actions.js dan disambungkan ke form di app/admin/login/page.jsx. Login berhasil diarahkan ke /admin; login gagal menampilkan pesan error yang jelas di halaman login. Buat juga tombol "Keluar" di components/NavAdmin.jsx berfungsi: mengakhiri sesi lalu kembali ke /admin/login. Jangan ubah tampilan. Hapus CatatanBelumAktif dari halaman login.**
+
+**Hasil:** **Hasil yang diharapkan
+Buka localhost:3000/admin/login, masuk dengan password salah: muncul pesan error.
+Masuk dengan email dan password bawaan dari Langkah 4: masuk ke halaman daftar produk admin.
+Klik Keluar: kembali ke halaman login.**
 
 **Perbaikan:**
 
