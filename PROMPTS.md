@@ -18,9 +18,13 @@ Muat ulang localhost:3000. Nama produk ikut berubah = berhasil.**
 
 ## US-02 Detail produk
 
-**Prompt:**
+**Prompt:** **Baca docs/user-stories.md bagian US-02.
 
-**Hasil:**
+Ubah app/produk/[id]/page.jsx supaya mengambil satu produk dari tabel "produk" di Supabase berdasarkan id di URL, di sisi server, memakai koneksi Supabase yang sudah dibuat di lib/supabase. Kalau produk tidak ditemukan, panggil notFound(). Jangan ubah tampilannya. Hapus CatatanBelumAktif dari halaman ini, tapi biarkan tombol WhatsApp.**
+
+**Hasil:** **Klik salah satu kartu produk: halaman detail terbuka dengan foto, harga, dan deskripsi.
+Ubah deskripsi produk itu di Supabase, muat ulang: deskripsi ikut berubah.
+Buka localhost:3000/produk/9999: tampil halaman "Halaman tidak ditemukan".**
 
 **Perbaikan:**
 
